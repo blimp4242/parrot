@@ -43,7 +43,6 @@ impl EventHandler for SerenityHandler {
         // creates the global application commands
         self.create_commands(&ctx).await;
 
-
         // loads serialized guild settings
         self.load_guilds_settings(&ctx, &ready).await;
     }
