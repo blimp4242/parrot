@@ -43,6 +43,7 @@ impl EventHandler for SerenityHandler {
         // creates the global application commands
         self.create_commands(&ctx).await;
 
+
         // loads serialized guild settings
         self.load_guilds_settings(&ctx, &ready).await;
     }
@@ -82,44 +83,44 @@ impl SerenityHandler {
     async fn create_commands(&self, ctx: &Context) -> Vec<Command> {
         Command::set_global_application_commands(&ctx.http, |commands| {
             commands
-                .create_application_command(|command| {
-                    command
-                        .name("autopause")
-                        .description("Toggles whether to pause after a song ends")
-                })
+            .create_application_command(|command| {
+                command
+                    .name("autopause")
+                    .description("Imposta se mettere in pausa la riproduzione alla fine di una traccia")
+            })
                 .create_application_command(|command| {
                     command
                         .name("clear")
-                        .description("Clears the queue")
+                        .description("Svuota la coda")
                 })
                 .create_application_command(|command| {
                     command
                         .name("leave")
-                        .description("Leave the voice channel the bot is connected to")
+                        .description("Il bot lascia il canale a cui è connesso")
                 })
                 .create_application_command(|command| {
                     command
                         .name("managesources")
-                        .description("Manage streaming from different sources")
+                        .description("Gestisci lo streaming dei contenuti da fonti diverse")
                 })
                 .create_application_command(|command| {
                     command
                         .name("np")
-                        .description("Displays information about the current track")
+                        .description("Mostra informazioni della traccia in riproduzione")
                 })
                 .create_application_command(|command| {
                     command
                         .name("pause")
-                        .description("Pauses the current track")
+                        .description("Mette in pausa la traccia corrente")
                 })
                 .create_application_command(|command| {
                     command
                         .name("play")
-                        .description("Add a track to the queue")
+                        .description("Aggiunge una traccia alla coda")
                         .create_option(|option| {
                                 option
                                     .name("query")
-                                    .description("The media to play")
+                                    .description("Il contenuto da riprodurre")
                                     .kind(CommandOptionType::String)
                                     .required(true)
                         })
@@ -127,16 +128,16 @@ impl SerenityHandler {
                 .create_application_command(|command| {
                     command
                         .name("superplay")
-                        .description("Add a track to the queue in a special way")
+                        .description("Aggiungi una traccia alla coda in maniera speciale")
                         .create_option(|option| {
                             option
                                 .name("next")
-                                .description("Add a track to be played up next")
+                                .description("Aggiunge una traccia da riprodurre successivamente")
                                 .kind(CommandOptionType::SubCommand)
                                 .create_sub_option(|option| {
                                     option
                                         .name("query")
-                                        .description("The media to play")
+                                        .description("Il contenuto da riprodurre")
                                         .kind(CommandOptionType::String)
                                         .required(true)
                                 })
@@ -144,11 +145,11 @@ impl SerenityHandler {
                         .create_option(|option| {
                             option
                                 .name("jump")
-                                .description("Instantly plays a track, skipping the current one")
+                                .description("Riproduce una traccia instantaneamente, saltando quella attuale")
                                 .kind(CommandOptionType::SubCommand)
                                 .create_sub_option(|option| {
                                     option.name("query")
-                                    .description("The media to play")
+                                    .description("Il contenuto da riprodurre")
                                     .kind(CommandOptionType::String)
                                     .required(true)
                                 })
@@ -156,12 +157,12 @@ impl SerenityHandler {
                         .create_option(|option| {
                             option
                                 .name("all")
-                                .description("Add all tracks if the URL refers to a video and a playlist")
+                                .description("Aggiunge tutte le tracce se lo URL si riferisce a un video e una playlist")
                                 .kind(CommandOptionType::SubCommand)
                                 .create_sub_option(|option| {
                                     option
                                         .name("query")
-                                        .description("The media to play")
+                                        .description("Il contenuto da riprodurre")
                                         .kind(CommandOptionType::String)
                                         .required(true)
                                 })
@@ -169,7 +170,7 @@ impl SerenityHandler {
                         .create_option(|option| {
                             option
                                 .name("reverse")
-                                .description("Add a playlist to the queue in reverse order")
+                                .description("Aggiunge una playlist alla coda ma in ordine inverso")
                                 .kind(CommandOptionType::SubCommand)
                                 .create_sub_option(|option| {
                                     option
@@ -182,12 +183,12 @@ impl SerenityHandler {
                         .create_option(|option| {
                             option
                                 .name("shuffle")
-                                .description("Add a playlist to the queue in random order")
+                                .description("Aggiunge una playlist alla coda ma in ordine casuale")
                                 .kind(CommandOptionType::SubCommand)
                                 .create_sub_option(|option| {
                                     option
                                         .name("query")
-                                        .description("The media to play")
+                                        .description("Il contenuto da riprodurre")
                                         .kind(CommandOptionType::String)
                                         .required(true)
                                 })
@@ -196,16 +197,16 @@ impl SerenityHandler {
                 .create_application_command(|command| {
                     command
                         .name("queue")
-                        .description("Shows the queue")
+                        .description("Mostra la coda")
                 })
                 .create_application_command(|command| {
                     command
                         .name("remove")
-                        .description("Removes a track from the queue")
+                        .description("Rimuove una traccia dalla coda")
                         .create_option(|option| {
                             option
                                 .name("index")
-                                .description("Position of the track in the queue (1 is the next track to be played)")
+                                .description("Posizione della traccia nella coda (1 è la prossima traccia ad essere riprodotta)")
                                 .kind(CommandOptionType::Integer)
                                 .required(true)
                                 .min_int_value(1)
@@ -213,7 +214,7 @@ impl SerenityHandler {
                         .create_option(|option| {
                             option
                                 .name("until")
-                                .description("Upper range track position to remove a range of tracks")
+                                .description("Posizione della traccia dell'intervallo superiore per rimuovere un intervallo di tracce")
                                 .kind(CommandOptionType::Integer)
                                 .required(false)
                                 .min_int_value(1)
@@ -222,34 +223,34 @@ impl SerenityHandler {
                 .create_application_command(|command| {
                     command
                         .name("repeat")
-                        .description("Toggles looping for the current track")
+                        .description("Attiva/Disattiva la ripetizione della traccia corrente")
                 })
                 .create_application_command(|command| {
                     command
                         .name("resume")
-                        .description("Resumes the current track")
+                        .description("Riprende la traccia attuale")
                 })
                 .create_application_command(|command| {
                     command
                         .name("seek")
-                        .description("Seeks current track to the given position")
+                        .description("Cerca la traccia corrente al minutaggio inserito")
                         .create_option(|option| {
                             option
                                 .name("timestamp")
-                                .description("Timestamp in the format HH:MM:SS")
+                                .description("Minutaggio nel formato HH:MM:SS")
                                 .kind(CommandOptionType::String)
                                 .required(true)
                         })
                 })
                 .create_application_command(|command| {
-                    command.name("shuffle").description("Shuffles the queue")
+                    command.name("shuffle").description("Mischia la coda")
                 })
                 .create_application_command(|command| {
-                    command.name("skip").description("Skips the current track")
+                    command.name("skip").description("Salta la traccia corrente")
                     .create_option(|option| {
                         option
                             .name("to")
-                            .description("Track index to skip to")
+                            .description("Indice del brano al quale skippare")
                             .kind(CommandOptionType::Integer)
                             .required(false)
                             .min_int_value(1)
@@ -258,20 +259,20 @@ impl SerenityHandler {
                 .create_application_command(|command| {
                     command
                         .name("stop")
-                        .description("Stops the bot and clears the queue")
+                        .description("Ferma il bot e svuota la coda")
                 })
                 .create_application_command(|command| {
                     command
                         .name("summon")
-                        .description("Summons the bot in your voice channel")
+                        .description("Richiama il bot nel proprio canale vocale")
                 })
                 .create_application_command(|command| {
                     command
                         .name("version")
-                        .description("Displays the current version")
+                        .description("Visualizza la versione corrente")
                 })
                 .create_application_command(|command| {
-                    command.name("voteskip").description("Starts a vote to skip the current track")
+                    command.name("voteskip").description("Avvia una votazione per saltare il brano corrente")
                 })
         })
         .await
