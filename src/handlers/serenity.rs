@@ -82,11 +82,11 @@ impl SerenityHandler {
     async fn create_commands(&self, ctx: &Context) -> Vec<Command> {
         Command::set_global_application_commands(&ctx.http, |commands| {
             commands
-            .create_application_command(|command| {
-                command
-                    .name("autopause")
-                    .description("Imposta se mettere in pausa la riproduzione alla fine di una traccia")
-            })
+                .create_application_command(|command| {
+                    command
+                        .name("autopause")
+                        .description("Imposta se mettere in pausa la riproduzione alla fine di una traccia")
+                })
                 .create_application_command(|command| {
                     command
                         .name("clear")
