@@ -170,9 +170,25 @@ pub async fn play(
                     .ok_or(ParrotError::Other("failed to fetch playlist"))?;
 
                 for url in urls.iter() {
+<<<<<<< HEAD
                     let Ok(queue) =
                         enqueue_track(&call, &QueryType::VideoLink(url.to_string())).await
                     else {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    let Ok(queue) =
+                        enqueue_track(&call, &QueryType::VideoLink(url.to_string())).await
+                    else {
+=======
+                    let Ok(queue) = enqueue_track(&call, &QueryType::VideoLink(url.to_string())).await else {
+>>>>>>> a1409ae (Sync changes made to the main branch)
+=======
+                    let Ok(queue) =
+                        enqueue_track(&call, &QueryType::VideoLink(url.to_string())).await
+                    else {
+>>>>>>> 8ed1377 (update rspotify crate to v0.12.0 (#249))
+>>>>>>> 5c8cc68 (update rspotify crate to v0.12.0 (#249))
                         continue;
                     };
                     update_queue_messages(&ctx.http, &ctx.data, &queue, guild_id).await;
@@ -197,8 +213,22 @@ pub async fn play(
                     .ok_or(ParrotError::Other("failed to fetch playlist"))?;
 
                 for (idx, url) in urls.into_iter().enumerate() {
+<<<<<<< HEAD
                     let Ok(queue) = insert_track(&call, &QueryType::VideoLink(url), idx + 1).await
                     else {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    let Ok(queue) = insert_track(&call, &QueryType::VideoLink(url), idx + 1).await
+                    else {
+=======
+                    let Ok(queue) = insert_track(&call, &QueryType::VideoLink(url), idx + 1).await else {
+>>>>>>> a1409ae (Sync changes made to the main branch)
+=======
+                    let Ok(queue) = insert_track(&call, &QueryType::VideoLink(url), idx + 1).await
+                    else {
+>>>>>>> 8ed1377 (update rspotify crate to v0.12.0 (#249))
+>>>>>>> 5c8cc68 (update rspotify crate to v0.12.0 (#249))
                         continue;
                     };
                     update_queue_messages(&ctx.http, &ctx.data, &queue, guild_id).await;
@@ -231,9 +261,25 @@ pub async fn play(
                 let mut insert_idx = 1;
 
                 for (i, url) in urls.into_iter().enumerate() {
+<<<<<<< HEAD
                     let Ok(mut queue) =
                         insert_track(&call, &QueryType::VideoLink(url), insert_idx).await
                     else {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    let Ok(mut queue) =
+                        insert_track(&call, &QueryType::VideoLink(url), insert_idx).await
+                    else {
+=======
+                    let Ok(mut queue) = insert_track(&call, &QueryType::VideoLink(url), insert_idx).await else {
+>>>>>>> a1409ae (Sync changes made to the main branch)
+=======
+                    let Ok(mut queue) =
+                        insert_track(&call, &QueryType::VideoLink(url), insert_idx).await
+                    else {
+>>>>>>> 8ed1377 (update rspotify crate to v0.12.0 (#249))
+>>>>>>> 5c8cc68 (update rspotify crate to v0.12.0 (#249))
                         continue;
                     };
 
