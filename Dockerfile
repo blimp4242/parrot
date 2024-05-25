@@ -1,7 +1,7 @@
 # Build image
 # Necessary dependencies to build Parrot
-#FROM rust:slim-bullseye as build
-FROM rust:1.75.0-slim-bullseye as build
+FROM rust:slim-bullseye as build
+
 RUN apt-get update && apt-get install -y \
     build-essential autoconf automake cmake libtool libssl-dev pkg-config
 
